@@ -1,75 +1,45 @@
-/ %h2 Sign up
-/ = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-/   = devise_error_messages!
-/   .field
-/     = f.label :first_name
-/     %br/
-/     = f.email_field :first_name, autofocus: true
-  
-/   .field
-/     = f.label :last_name
-/     %br/
-/     = f.email_field :last_name
-
-/   .field
-/     = f.label :email
-/     %br/
-/     = f.email_field :email
-/   .field
-/     = f.label :password
-/     - if @minimum_password_length
-/       %em
-/         (#{@minimum_password_length} characters minimum)
-/     %br/
-/     = f.password_field :password, autocomplete: "off"
-/   .field
-/     = f.label :password_confirmation
-/     %br/
-/     = f.password_field :password_confirmation, autocomplete: "off"
-/   .actions
-/     = f.submit "Sign up"
-/ = render "devise/shared/links"
-
-
 .container
   = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
     #loginbox.mainbox.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2{:style => "margin-top:50px;"}
       .panel.panel-info
         .panel-heading
-          .panel-title Sign Up
-        .panel-body{:style => "padding-top:30px"}
-          = devise_error_messages!
-          #login-alert.alert.alert-danger.col-sm-12{:style => "display:none"}
-          %form#loginform.form-horizontal{:role => "form"}
-            .input-group{:style => "margin-bottom: 25px"}
-              %span.input-group-addon
-                %i.glyphicon.glyphicon-user
-              = f.text_field :first_name, class: "form-control", autofocus: true, :placeholder => "First Name"
-            .input-group{:style => "margin-bottom: 25px"}
-              %span.input-group-addon
-                %i.glyphicon.glyphicon-user
-              = f.text_field :last_name, class: "form-control", :placeholder => "Last Name"
+          .panel-title 
+            %h3 Sign Up
+            %hr
+            .error
+              - if resource.errors.full_messages.any?
+                - resource.errors.full_messages.each do |error_message|
+                  %p= error_message if resource.errors.full_messages.first == error_message
 
-            .input-group{:style => "margin-bottom: 25px"}
-              %span.input-group-addon
-                %i.glyphicon.glyphicon-envelope
-              = f.email_field :email, class: "form-control", :placeholder => "Email"
-            .input-group{:style => "margin-bottom: 25px"}
-              %span.input-group-addon
-                %i.glyphicon.glyphicon-lock
-              = f.password_field :password, autocomplete: "off", id: "login-password", class: "form-control", placeholder: "Password"
-            .input-group{:style => "margin-bottom: 25px"}
-              %span.input-group-addon
-                %i.glyphicon.glyphicon-lock
-              = f.password_field :password_confirmation, autocomplete: "off", id: "login-password", class: "form-control", placeholder: "Password Confirmation"
-            
-            .form-group{:style => "margin-top:10px"}
-              .col-sm-12.controls
-                = f.submit "Sign up", class: "btn login btn btn-success"
-            .form-group
-              .col-md-12.control
-                %div{:style => "border-top: 1px solid#888; padding-top:15px; font-size:85%"}
-                  Already have an account!
-                  = link_to "Login", new_session_path(resource_name)
+          .input-group{:style => "margin-bottom: 25px"}
+            %span.input-group-addon
+              %i.glyphicon.glyphicon-user
+            = f.text_field :first_name, class: "form-control", autofocus: true, :placeholder => "First Name"
+          .input-group{:style => "margin-bottom: 25px"}
+            %span.input-group-addon
+              %i.glyphicon.glyphicon-user
+            = f.text_field :last_name, class: "form-control", :placeholder => "Last Name"
+
+          .input-group{:style => "margin-bottom: 25px"}
+            %span.input-group-addon
+              %i.glyphicon.glyphicon-envelope
+            = f.email_field :email, class: "form-control", :placeholder => "Email"
+          .input-group{:style => "margin-bottom: 25px"}
+            %span.input-group-addon
+              %i.glyphicon.glyphicon-lock
+            = f.password_field :password, autocomplete: "off", id: "login-password", class: "form-control", placeholder: "Password"
+          .input-group{:style => "margin-bottom: 25px"}
+            %span.input-group-addon
+              %i.glyphicon.glyphicon-lock
+            = f.password_field :password_confirmation, autocomplete: "off", id: "login-password", class: "form-control", placeholder: "Password Confirmation"
+          
+          .form-group{:style => "margin-top:10px"}
+            .col-sm-12.controls
+              = f.submit "Sign up", class: "btn login btn btn-success"
+          .form-group
+            .col-md-12.control
+              %div{:style => "border-top: 1px solid#888; padding-top:15px; font-size:85%"}
+                Already have an account!
+                = link_to "Login", new_session_path(resource_name)
 
 

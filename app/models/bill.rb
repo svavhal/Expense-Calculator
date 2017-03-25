@@ -6,6 +6,8 @@ class Bill < ActiveRecord::Base
   before_save :save_amount
   after_create :save_borrowed_amt
 
+  validates :event, :event_date, presence: true
+
   def is_involved? user_id
   	payers.where(status: true, user_id: user_id).present?
   end

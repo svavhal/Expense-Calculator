@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_many :members
   has_many :groups, through: :members
 
+  validates :first_name, presence: true
+
   def name
   	"#{first_name} #{last_name}"
   end

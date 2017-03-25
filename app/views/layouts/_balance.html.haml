@@ -8,11 +8,26 @@
 						%h3 Members
 				.panel-body
 					%table.table
-						- @group.settle_up_bill.each do |member, amount|
+						- @group.users.each do |member|
+							%tr
+								%td               
+									%i.glyphicon.glyphicon-user
+										%span.pad-5
+											= member.name
+
+	.container
+		.panel-group
+			.panel.panel-default
+				.panel-heading
+					%h6.panel-title
+						%h3 Bill Settlement
+				.panel-body
+					%table.table
+						- @group.settle_up_bill.each do |member, balance|
 							%tr
 								%td               
 									%i.glyphicon.glyphicon-user
 										%span.pad-5
 											= member
-											= amount
+											= balance
 	            
