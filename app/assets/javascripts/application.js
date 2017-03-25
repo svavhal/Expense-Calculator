@@ -19,4 +19,3 @@
 //= require jquery_nested_form
 //= require bootstrap-toggle.min
 //= require bootstrap-datepicker
-//= require main
