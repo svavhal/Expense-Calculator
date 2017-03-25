@@ -1,0 +1,18 @@
+- if current_user && @group
+	%br
+	.container
+		.panel-group
+			.panel.panel-default
+				.panel-heading
+					%h6.panel-title
+						%h3 Members
+				.panel-body
+					%table.table
+						- @group.settle_up_bill.each do |member, amount|
+							%tr
+								%td               
+									%i.glyphicon.glyphicon-user
+										%span.pad-5
+											= member
+											= amount
+	            

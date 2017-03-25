@@ -1,0 +1,36 @@
+.modal-dialog
+	.modal-content
+		.modal-header.btn-settle
+			%h4.modal-title Add New Bill
+			%button.close{"data-dismiss" => "modal", :type => "button"} ×
+		.modal-body
+			= nested_form_for @bill, url: group_bills_path(@group) do |f|
+				.form-group
+					.col-sm-12
+						= f.hidden_field :group_id, value: @group.id
+						= f.text_field :event, class: "form-control", placeholder: "Event"
+				.form-group
+					.col-sm-12
+						= f.text_area :description, class: "form-control", placeholder: "Short description"
+				.form-group
+					.col-sm-12
+						= f.text_field :location, class: "form-control", placeholder: "Location"
+				.form-group
+					.col-sm-12
+						.input-group.date.datepicker
+							= f.text_field :event_date, class: "form-control", placeholder: "Bill Date"
+							.input-group-addon
+								%span.glyphicon.glyphicon-th
+
+				%hr
+				%b Add GROUP MEMBERS paying details (** select the member if he involved in bill)
+				%br
+				= render partial: "payer_details", object: f, as: 'f'
+				%hr
+				.form-group.text-right
+					= f.submit "Save", class: "btn btn-bill"
+
+:javascript
+	$(".datepicker").datepicker({
+		format: 'dd/mm/yyyy',
+	})

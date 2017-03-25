@@ -1,0 +1,25 @@
+.modal-dialog.modal-lg
+	.modal-content
+		.modal-header.btn-settle
+			%h4.modal-title
+				Bill Details
+			%button.close{"data-dismiss" => "modal", :type => "button"} ×
+		.modal-body
+			%p= bill_details
+			%p= @bill.description
+			%table.table
+				%tr
+					%th Payer
+					%th Amount Paid
+					%th You are owed
+				- @bill.payers.each do |payer|
+					%tr
+						%td= payer.user.name 
+						%td= number_to_currency payer.amount
+						%td= settelment_amount payer
+				%tr
+					%td
+					%td 
+						%b Total Amount 
+					%td
+						%b= number_to_currency @bill.amount

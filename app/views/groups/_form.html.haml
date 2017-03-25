@@ -1,0 +1,21 @@
+.modal-dialog
+	.modal-content
+		.modal-header.btn-settle
+			%h4.modal-title Create New Group
+			%button.close{"data-dismiss" => "modal", :type => "button"} ×
+		.modal-body
+			= nested_form_for @group do |f|
+				.form-group
+					/%label.col-sm-2.control-label Name
+					.col-sm-12
+						= f.text_field :name, class: "form-control", placeholder: "Group Name"
+				.form-group
+					.col-sm-12
+						= f.text_area :description, class: "form-control", placeholder: "Short description"
+				%hr
+				%b GROUP MEMBERS (* member should be registered )
+				= render partial: "group_members", object: f, as: 'f'
+				%hr
+				.form-group.text-right
+					= f.submit "Save", class: "btn btn-bill"
+				

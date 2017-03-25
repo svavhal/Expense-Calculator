@@ -1,0 +1,18 @@
+- if current_user 
+  %br
+  .container
+    .panel-group
+      .panel.panel-default
+        .panel-heading
+          %h6.panel-title
+            %h3 Groups
+        .panel-body
+          %table.table
+            - @groups.each do |group|
+              %tr
+                %td
+                  = link_to group.name, group_path(group)
+
+  = link_to "Create new Group", new_group_path, class: "btn btn-block btn-settle", data: { "remote": "true", "toggle": "model", "target": "#new-group", "backdrop": "static", "keyboard": "false" }
+
+  .modal{:role => "dialog", id: "new-group"}

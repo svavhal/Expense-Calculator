@@ -1,0 +1,32 @@
+.form-group
+	.row.pad-5
+		.col-sm-10
+	%table.table
+		%tr
+			%th Member
+			%th Is Involved?
+			%th Amount ($)
+		= f.fields_for :payers do |form|
+			%tr
+				%td
+					= form.object.user.name
+					= form.hidden_field :user_id
+					= form.hidden_field :group_id
+				%td
+					= form.check_box :status, class: "checkbox", data: {:checked => "checked", "toggle": "toggle", ffstyle: 'danger', "on": "Yes", "off": "No", "show-amount": "amount-#{form.object.user.id}", offstyle: "danger", onstyle: "success" }
+				
+				%td
+					= form.text_field :amount, class: "form-control", id: "amount-#{form.object.user.id}", placeholder: "Amount", disabled: "true"
+
+:javascript
+	$(".checkbox").bootstrapToggle();
+	$('.checkbox').change(function() {
+		var id = $(this).attr('data-show-amount');
+		if(this.checked){
+			$("#" + id).removeAttr("disabled");
+		}
+		else{
+			$("#" + id).attr("disabled", "disabled");
+			$("#" + id).val('');
+		}
+	})

@@ -1,0 +1,30 @@
+%br
+.text-center
+	%h3
+		= @group.name
+%hr
+.container-fluid
+	.row
+		.col-md-6 
+			= link_to "Add Bill", new_group_bill_path(@group), class: "btn btn-block btn-bill ", data: { "remote": "true", "toggle": "modal", "target": "#new-bill", "backdrop": "static", "keyboard": "false" }
+			.modal{:role => "dialog", id: "new-bill"}
+		.col-md-6
+			.btn.btn-block.btn-settle Settle up
+%br
+.container-fluid
+	.row
+		%table.table.table-hover
+			- @bills.each do |bill|
+				%tr
+					%td
+						= event_date(bill.event_date)
+					%td
+						= bill.event
+					%td
+						= number_to_currency bill.amount
+					%td
+						= set_status bill.is_involved? current_user.id 
+					%td
+						= link_to "View Details", group_bill_path(@group, bill), data: { "remote": "true", "toggle": "modal", "target": "#bill-modal-#{bill.id}", "backdrop": "static", "keyboard": "false" }
+
+					.modal{:role => "dialog", id: "bill-modal-#{bill.id}"}

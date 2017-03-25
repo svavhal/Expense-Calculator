@@ -1,0 +1,12 @@
+.form-group
+	.row.pad-5
+		.col-sm-10
+			= current_user.email  
+	= f.fields_for :members do |form|
+		.row.pad-5
+			.col-sm-10
+				= form.email_field :user_id, class: "form-control member", placeholder: "Member Email-Id" 
+			.col-sm-2
+				= form.link_to_remove do
+					%span.glyphicon.glyphicon-remove.text-dange.pad-top-2
+	%p= f.link_to_add "Add a Member", :members
