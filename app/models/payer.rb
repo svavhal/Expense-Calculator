@@ -1,4 +1,5 @@
 class Payer < ActiveRecord::Base
+  # Associations
   belongs_to :group
   belongs_to :user
 

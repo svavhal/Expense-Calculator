@@ -1,11 +1,14 @@
 class Bill < ActiveRecord::Base
+  # Associations
   belongs_to :group
   has_many :payers, dependent: :destroy
   accepts_nested_attributes_for :payers, reject_if: :all_blank
 
+  # Callbacks
   before_save :save_amount
   after_create :save_borrowed_amt
 
+  # Validations
   validates :event, :event_date, presence: true
 
   def is_involved?(user_id)

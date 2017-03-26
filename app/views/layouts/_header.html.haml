@@ -6,11 +6,11 @@
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.mr-auto
       %li.nav-item.active
-        / %a.nav-link{:href => "#"}
-        /   Home
-        /   %span.sr-only (current)
-
     - if user_signed_in?
+      %a.nav-link{:href => "javascript:void(0)"}
+        %i.glyphicon.glyphicon-user.pad-5.text-danger
+        %span.color-white= current_user.name
+
       = link_to('Logout', destroy_user_session_path, method: :delete, class: "navbar-brand color-white")
     - else
       = link_to('Login', new_user_session_path, class: "navbar-brand color-white")
