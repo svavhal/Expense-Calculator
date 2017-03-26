@@ -15,7 +15,7 @@ class SettlementInfo
 
   def settleup_messages
     @messages = []
-    check_already_settle_up?
+    check_already_settle_up? if @amount == 0
     @expenses.each do |user_id, amt|
       next if user_id == @user_id
       break if @amount == 0
@@ -30,7 +30,7 @@ class SettlementInfo
   end
 
   def levelup_owes_bill(amt)
-    if amt < 0
+    if amt > 0
       @amount += amt
       if @amount > 0
         @amount = (@expenses[@user_id] * -1).round(2)
