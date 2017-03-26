@@ -19,6 +19,7 @@ class SettlementInfo
     @expenses.each do |user_id, amt|
       next if user_id == @user_id
       break if @amount == 0
+
       @bill_user = find_user user_id
       if @amount < 0
         levelup_owes_bill(amt)
@@ -52,7 +53,8 @@ class SettlementInfo
       if @amount < 0
         @expenses[@user_id] = 0
         @expenses[@bill_user.id] = @amount
-        @messages.push "#{find_user.name} borrows #{@bill_user.name} $#{(@amount * -1).round(2)} "
+        bill_amt = ( amt - @amount ).round(2)
+        @messages.push "#{find_user.name} borrows #{@bill_user.name} $#{bill_amt * -1} "
         @amount = 0
       else
         @expenses[@bill_user.id] = 0
