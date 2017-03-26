@@ -5,14 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :set_user_groups
   protect_from_forgery with: :exception
 
-
   def set_user_groups
-  	if current_user
-  		@groups = current_user.groups
-  	end
-  end
-
-  def after_sign_out_path_for(resource_or_scope)
-    new_user_session_path
+    @groups = current_user.groups if current_user
   end
 end

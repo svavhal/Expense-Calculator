@@ -23,11 +23,10 @@
 						%h3 Bill Settlement
 				.panel-body
 					%table.table
-						- @group.settle_up_bill.each do |member, balance|
+						- @group.settlement_info(current_user.id).each do |message|
 							%tr
 								%td               
-									%i.glyphicon.glyphicon-user
+									%i.glyphicon.glyphicon-info
 										%span.pad-5
-											= member
-											= balance
+											= message
 	            

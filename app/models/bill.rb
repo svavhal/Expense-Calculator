@@ -8,27 +8,31 @@ class Bill < ActiveRecord::Base
 
   validates :event, :event_date, presence: true
 
-  def is_involved? user_id
-  	payers.where(status: true, user_id: user_id).present?
+  def is_involved?(user_id)
+    payers.where(status: true, user_id: user_id).present?
   end
 
-  def payments_made(user)
+  def payments_made(_user)
     payers.where(user_id: user_id).sum(&:amount)
   end
 
   def avg_amount_per_user
-  	( amount.to_f / payers.where(status: true).count )
+    (amount.to_f / payers.where(status: true).count)
   end
 
   def save_amount
-    _amount = payers.map(&:amount).compact.sum(:+) rescue 0
+    _amount = begin
+                payers.map(&:amount).compact.sum(:+)
+              rescue
+                0
+              end
     self.amount = _amount
   end
 
   def save_borrowed_amt
     payers.each do |payer|
       if is_involved?(payer.user.id)
-        payer.amt_borrowed =  ( avg_amount_per_user - payer.amount )
+        payer.amt_borrowed = (avg_amount_per_user - payer.amount)
       else
         payer.amt_borrowed = 0
       end
